@@ -11,8 +11,8 @@ config_s2i
 ######## CUSTOMIZATION STARTS HERE ############
 
 echo "---> Installing application source"
-cp -Rf /tmp/src/*.html ./
-cp -Rf /tmp/src/src/*.html ./
+cp -Rf /tmp/src/*.html /tmp/src/src/*.html ./
+
 echo "Current dir:"
 echo $(pwd)
 echo "Dir: $(pwd)"
