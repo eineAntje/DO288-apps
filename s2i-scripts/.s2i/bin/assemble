@@ -13,6 +13,10 @@ config_s2i
 echo "---> Installing application source"
 cp -Rf /tmp/src/*.html ./
 
+echo "Current dir:"
+echo $(pwd)
+echo "Dir: $(pwd)"
+
 DATE=`date "+%b %d, %Y @ %H:%M %p"`
 
 echo "---> Creating info page"
