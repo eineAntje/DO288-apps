@@ -1,10 +1,12 @@
 #!/bin/bash
 
 echo "Das ist ein Test"
-echo ls -l tmp/src
+echo $(ls -l tmp/)
+echo $(ls -l tmp/src/)
+
 
 mv /tmp/src/postcommit.sh /tmp
-
+echo $(ls -l tmp/)
 chmod gu+x tmp/postcommit.sh
 
 /usr/libexec/s2i/assemble
