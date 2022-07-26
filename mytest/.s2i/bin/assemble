@@ -1,0 +1,5 @@
+#!/bin/bash
+
+mkdir /tmp/myscripts
+cp /tmp/src/import.sh /tmp/myscripts/
+/usr/libexec/s2i/assemble
