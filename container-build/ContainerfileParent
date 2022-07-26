@@ -1,0 +1,28 @@
+FROM registry.access.redhat.com/ubi8/ubi:8.0
+
+LABEL io.k8s.description="This is a test to prepare for the exam" \
+      io.k8s.display-name="My Test Image" \
+      io.openshift.expose-services="8080:http" \
+      io.openhsift.tags="httpd,apache"
+
+ENV DOCROOT=/var/www/html \
+    TEST="This is just a test"
+
+RUN yum install -y --nodocs --disableplugin=subscription-manager httpd && \
+    yum clean all --disableplugin=subscription-manager -y && \
+    echo "Hello from my test httpd container!" > ${DOCROOT}/index.html
+
+RUN sed -i "s/Listen 80/Listen 8080/g" /etc/httpd/conf/httpd.conf && \
+    sed -i "s/#ServerName www.example.com:80/ServerName 0.0.0.0:8080/g" /etc/httpd/conf/httpd.conf && \
+    chgrp -R 0 /var/run/httpd /var/log/httpd && \
+    chmod -R g=u /var/run/httpd /var/log/httpd && \
+    echo "ENV-Var: $TEST"
+
+ONBUILD COPY src/*.html $DOCROOT/
+
+USER 1001
+
+EXPOSE 8080
+
+CMD /usr/sbin/httpd -DFOREGROUND
+
